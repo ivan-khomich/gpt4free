@@ -27,7 +27,11 @@ class Completion:
             'user-agent': UserAgent().random,
         }
 
-        proxies = {'http': 'http://' + proxy, 'https': 'http://' + proxy} if proxy else None
+        proxies = (
+            {'http': f'http://{proxy}', 'https': f'http://{proxy}'}
+            if proxy
+            else None
+        )
 
         requests.post(
             'https://chatbot.theb.ai/api/chat-process',
