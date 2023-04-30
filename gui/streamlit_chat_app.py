@@ -15,9 +15,7 @@ def load_conversations():
     try:
         with open(conversations_file, "rb") as f:
             return pickle.load(f)
-    except FileNotFoundError:
-        return []
-    except EOFError:
+    except (FileNotFoundError, EOFError):
         return []
 
 
@@ -31,7 +29,7 @@ def save_conversations(conversations, current_conversation):
     if not updated:
         conversations.append(current_conversation)
 
-    temp_conversations_file = "temp_" + conversations_file
+    temp_conversations_file = f"temp_{conversations_file}"
     with open(temp_conversations_file, "wb") as f:
         pickle.dump(conversations, f)
 
